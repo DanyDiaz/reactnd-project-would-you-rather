@@ -12,6 +12,53 @@ code {
     monospace;
 }
 
+nav {
+  color: #009aff;
+}
+
+hr {
+  border-top: 4px solid #252fde;
+  margin: 0;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+nav ul li {
+  display: flex;
+}
+
+nav ul li a {
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.nav-link, .nav-link:focus {
+  color: #009aff;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 0;
+  background-color: white;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.nav-active {
+  background-color: #009aff;
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
 h1 {
   width: 100%;
   text-align: center;
@@ -22,7 +69,7 @@ h1 {
 
 h2 {
   width: 100%;
-  color: #009aff;
+  color: #009aff; /*#868cff*/
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;

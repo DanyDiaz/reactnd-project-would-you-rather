@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import LoadingBar from 'react-redux-loading-bar'
+import { BrowserRouter as Router } from 'react-router-dom'
 import SignIn from './SignIn'
 import { handleInitialData } from '../actions/shared'
-import LoadingBar from 'react-redux-loading-bar'
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -12,13 +14,19 @@ class App extends Component {
   render() {
     const { loading, authedUser } = this.props
     return (
-      <div>
+      <Router>
         <LoadingBar />
-        {loading === false && authedUser === null && <SignIn />}
-        {loading === false && authedUser !== null && (
-          null
+        {loading === false && (
+          <Fragment>
+            {authedUser === null 
+              ? <SignIn />
+              : <Fragment>
+                  <Nav />
+                </Fragment>
+            }
+          </Fragment>
         )}
-      </div>
+      </Router>
     )
   }
 }
