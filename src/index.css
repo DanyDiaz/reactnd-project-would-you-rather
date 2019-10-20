@@ -11,3 +11,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1 {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1f7733;
+}
+
+h2 {
+  width: 100%;
+  color: #009aff;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  margin: 10px auto 10px auto;
+  background-color: #009aff;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  width: calc(100% - 40px);
+}
+
+button:focus {
+  background-color: #007bff;
+}
+
+button:disabled {
+  background-color: #86cfff;
+}
+
+select {
+  font-size: 16px;
+  color: #1f7733;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.sign-in-image {
+  margin: 5px auto 5px auto;
+  color: #009aff;
+}
+
+.signin-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 40px);
+  padding: 20px;
+}
+
+.userlist-dropdown {
+  display: flex;
+  width: calc(100% - 40px);
+  margin-left: auto;
+  margin-right: auto;
+}
