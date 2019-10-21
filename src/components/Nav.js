@@ -10,7 +10,8 @@ class Nav extends Component {
     }
 
     render() {
-        let { username } = this.props
+        let { username, avatarURL } = this.props
+        const avatar = require('../' + avatarURL)
         return (
             <nav>
                 <ul>
@@ -24,7 +25,10 @@ class Nav extends Component {
                         <NavLink to='/leaderboard' activeClassName='nav-active'>Leader Board</NavLink>
                     </li>
                     <li>
-                        <label className='nav-link'>Hi, {username}</label>
+                        <label className='nav-link'>
+                            <img src={avatar} alt={`Avatar of the user ${username}`} />
+                            Hi, {username}
+                        </label>
                     </li>
                     <li>
                         <button className='nav-link' onClick={this.logOut}>Logout</button>
@@ -38,7 +42,8 @@ class Nav extends Component {
 
 function mapStateToProps({authedUser, users}) {
     return {
-        username: users[authedUser].name
+        username: users[authedUser].name,
+        avatarURL: users[authedUser].avatarURL
     }
 }
 

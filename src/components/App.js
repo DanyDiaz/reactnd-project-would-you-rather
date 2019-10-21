@@ -5,10 +5,13 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import SignIn from './SignIn'
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
+import QuestionDashboard from './QuestionDashboard'
+/****Remove this *****/ import { setAuthedUser } from '../actions/authedUser'
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
+    /****Remove this *****/ this.props.dispatch(setAuthedUser('tylermcginnis'))
   }
 
   render() {
@@ -22,6 +25,7 @@ class App extends Component {
               ? <SignIn />
               : <Fragment>
                   <Nav />
+                  <QuestionDashboard />
                 </Fragment>
             }
           </Fragment>

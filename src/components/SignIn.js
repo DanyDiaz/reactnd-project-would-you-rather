@@ -23,7 +23,7 @@ class SignIn extends Component {
     render() {
         const { users } = this.props
         return (
-            <div className='signin-container'>
+            <div className='signin-container flexbox-container'>
                 <h1>Welcome to the Would you rather app!</h1>
                 <IoIosLogIn className= 'sign-in-image' size={96} />
                 <h2>Sign in</h2>
