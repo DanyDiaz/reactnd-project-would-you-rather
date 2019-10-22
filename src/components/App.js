@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading-bar'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import SignIn from './SignIn'
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
 import QuestionDashboard from './QuestionDashboard'
+import Question from './Question'
 /****Remove this *****/ import { setAuthedUser } from '../actions/authedUser'
 
 class App extends Component {
@@ -18,18 +19,23 @@ class App extends Component {
     const { loading, authedUser } = this.props
     return (
       <Router>
-        <LoadingBar />
-        {loading === false && (
-          <Fragment>
-            {authedUser === null 
-              ? <SignIn />
-              : <Fragment>
-                  <Nav />
-                  <QuestionDashboard />
-                </Fragment>
-            }
-          </Fragment>
-        )}
+        <Fragment>
+          <LoadingBar />
+          {loading === false && (
+            <Fragment>
+              <Route path='/' render={() => 
+                (authedUser === null 
+                  ? <SignIn />
+                  : <Fragment>
+                      <Nav />
+                      <Route exact path='/' component={QuestionDashboard} />
+                      {<Route path='/questions/:id' component={Question} />}
+                    </Fragment>
+                )
+              }/>
+            </Fragment>
+          )}
+        </Fragment>
       </Router>
     )
   }

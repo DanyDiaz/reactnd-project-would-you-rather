@@ -1,23 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class QuestionPreview extends Component {
+    goToQuestionDetails = (e) => {
+        const { history, question } = this.props
+        e.preventDefault()
+        history.push(`/questions/${question.id}`)
+    }
+
     render() {
         const { author, question } = this.props
         const avatar = require('../' + author.avatarURL)
         return (
-            <div className='question-preview flexbox-container'>
+            <div className='question flexbox-container'>
                 <h3>{author.name} asks</h3>
-                <div className='flexbox-container question-preview-body'>
+                <form 
+                    className='flexbox-container question-body'
+                    onSubmit={this.goToQuestionDetails}>
                     <div className='flexbox-container avatar'>
                         <img src={avatar} alt={`Avatar of the user ${author.name}`} />
                     </div>
-                    <div className='flexbox-container question-preview-text'>
+                    <div className='flexbox-container question-text'>
                         <h4>Would you rather?</h4>
-                        <label>...{question.optionOneText}...</label>
-                        <button>View question details</button>
+                        <label className='question-label'>...{question.optionOneText}...</label>
+                        <button>View full question</button>
                     </div>
-                </div>
+                </form>
             </div>
         )
     }
@@ -37,4 +46,4 @@ function mapStateToProps({questions,users}, { id }) {
     }
 }
 
-export default connect(mapStateToProps)(QuestionPreview)
+export default withRouter(connect(mapStateToProps)(QuestionPreview))
