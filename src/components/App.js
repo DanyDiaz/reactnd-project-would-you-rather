@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading-bar'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SignIn from './SignIn'
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
 import QuestionDashboard from './QuestionDashboard'
 import Question from './Question'
+import NewQuestion from './NewQuestion'
+import NotFound from './NotFound'
 /****Remove this *****/ import { setAuthedUser } from '../actions/authedUser'
 
 class App extends Component {
@@ -28,8 +30,12 @@ class App extends Component {
                   ? <SignIn />
                   : <Fragment>
                       <Nav />
-                      <Route exact path='/' component={QuestionDashboard} />
-                      {<Route path='/questions/:id' component={Question} />}
+                      <Switch>
+                        <Route exact path='/' component={QuestionDashboard} />
+                        <Route path='/add' component={NewQuestion} />
+                        <Route path='/questions/:id' component={Question} />
+                        <Route component={NotFound} />
+                      </Switch>
                     </Fragment>
                 )
               }/>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleAnswerQuestion } from '../actions/shared'
+import NotFound from './NotFound'
 
 class Question extends Component {
     state = {
@@ -23,6 +24,11 @@ class Question extends Component {
 
     render() {
         const { author, question } = this.props
+
+        if(question === null) {
+            return <NotFound />
+        }
+
         const avatar = require('../' + author.avatarURL)
         const votesTotal = question.options[0].numVotes + question.options[1].numVotes
         return (
@@ -93,29 +99,35 @@ class Question extends Component {
 
 function mapStateToProps({questions,users, authedUser}, { match }) {
     const { id } = match.params
+    const question = questions[id]
+    if(question === undefined) {
+        return { question: null }
+    }
+
+    const user = users[question.author]
     return {
         author: {
-            id: questions[id].author,
-            name: users[questions[id].author].name,
-            avatarURL: users[questions[id].author].avatarURL
+            id: question.author,
+            name: user.name,
+            avatarURL: user.avatarURL
         },
         question: {
             id,
-            isAnsweredByCurrentUser: questions[id].optionOne.votes
-                .concat(questions[id].optionTwo.votes).includes(authedUser),
-            timestamp: questions[id].timestamp,
+            isAnsweredByCurrentUser: question.optionOne.votes
+                .concat(question.optionTwo.votes).includes(authedUser),
+            timestamp: question.timestamp,
             options: [
                 {
                     id: 'optionOne', 
-                    ...questions[id].optionOne, 
-                    numVotes: questions[id].optionOne.votes.length,
-                    isSelected: questions[id].optionOne.votes.includes(authedUser)
+                    ...question.optionOne, 
+                    numVotes: question.optionOne.votes.length,
+                    isSelected: question.optionOne.votes.includes(authedUser)
                 }, 
                 {
                     id: 'optionTwo', 
-                    ...questions[id].optionTwo, 
-                    numVotes: questions[id].optionTwo.votes.length,
-                    isSelected: questions[id].optionTwo.votes.includes(authedUser)
+                    ...question.optionTwo, 
+                    numVotes: question.optionTwo.votes.length,
+                    isSelected: question.optionTwo.votes.includes(authedUser)
                 }
             ]
         },

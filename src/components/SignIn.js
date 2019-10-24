@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { IoIosLogIn } from 'react-icons/io'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
+import { withRouter } from 'react-router-dom'
 
 class SignIn extends Component {
     state = {
@@ -16,8 +17,9 @@ class SignIn extends Component {
     }
 
     setAuthedUser = () => {
-        const { dispatch } = this.props
+        const { dispatch, history } = this.props
         dispatch(setAuthedUser(this.state.userId))
+        history.push('/')
     }
 
     render() {
@@ -25,7 +27,7 @@ class SignIn extends Component {
         return (
             <div className='signin-container flexbox-container'>
                 <h1>Welcome to the Would you rather app!</h1>
-                <IoIosLogIn className= 'sign-in-image' size={96} />
+                <IoIosLogIn className='sign-in-image' size={96} />
                 <h2>Sign in</h2>
                 <select className='userlist-dropdown' defaultValue='-1' onChange={this.handleChange}>
                     <option value='-1'>Select a user</option>
@@ -41,8 +43,8 @@ class SignIn extends Component {
 
 function mapStateToProps({users}) {
     return {
-        users: Object.values(users)
+        users: Object.values(users).sort((a,b) => a.name.localeCompare(b.name))
     }
 }
 
-export default connect(mapStateToProps)(SignIn)
+export default withRouter(connect(mapStateToProps)(SignIn))

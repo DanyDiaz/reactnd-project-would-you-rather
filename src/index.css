@@ -56,6 +56,21 @@ label {
   width: 100%;
 }
 
+.italic-label {
+  margin: 5px 0 5px 20px;
+  font-style: italic;
+}
+
+.big-label {
+  margin: 10px 0;
+  width: 100%;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 17px;
+  align-items: center;
+  text-align: center;  
+}
+
 .flexbox-container {
   display: flex;
   flex-wrap: wrap;
@@ -85,7 +100,7 @@ nav ul li a {
   align-items: center;
 }
 
-.nav-link, .nav-link:focus {
+.nav-link {
   color: #009aff;
   padding: 10px 20px;
   text-decoration: none;
@@ -98,6 +113,22 @@ nav ul li a {
   display: flex;
   align-items: center;
 }
+
+.nav-link:focus {
+  color: #009aff;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 0;
+  background-color: white;
+  font-size: inherit;
+  border: none;
+  outline: 1px solid #009aff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 
 img {
   width: 30px;
@@ -113,7 +144,7 @@ img {
 }
 
 button {
-  margin: 10px auto 10px auto;
+  margin: 10px auto;
   background-color: #009aff;
   color: white;
   font-size: 16px;
@@ -139,7 +170,12 @@ select {
 }
 
 .sign-in-image {
-  margin: 5px auto 5px auto;
+  margin: 5px auto;
+  color: #009aff;
+}
+
+.not-found-image {
+  margin: 30px auto;
   color: #009aff;
 }
 
@@ -195,6 +231,12 @@ select {
 
 .question-body {
   width: 100%;
+}
+
+.question-body input[type='text'] {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+  font-style: italic;
 }
 
 .avatar, .big-avatar {

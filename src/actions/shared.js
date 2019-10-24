@@ -1,7 +1,7 @@
-import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../utils/_DATA'
-import { receiveQuestions } from './questions'
-import { receiveUsers } from './users'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { _getQuestions, _getUsers, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA'
+import { receiveQuestions, addQuestion } from './questions'
+import { receiveUsers } from './users'
 
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 
@@ -32,5 +32,16 @@ export function handleAnswerQuestion(userId, questionId, answer) {
             .then(() => {
                 return dispatch(answerQuestion(userId, questionId, answer))
             })
+    }
+}
+
+export function handleAddQuestion(author, optionOneText, optionTwoText) {
+    return (dispatch) => {
+        return _saveQuestion({
+            author, optionOneText, optionTwoText
+        })
+        .then(question => {
+            dispatch(addQuestion(question))
+        })
     }
 }
