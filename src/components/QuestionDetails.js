@@ -16,7 +16,7 @@ class QuestionDetails extends Component {
                     <div className='flexbox-container question-text'>
                         <label className='question-text-result'>Results: </label>
                         {question.options.map(option => {
-                            const percentage = (option.numVotes / votesTotal) * 100
+                            const percentage = Math.round((option.numVotes / votesTotal) * 10000) / 100
                             return <div 
                                 key={option.id} 
                                 className={`question-result flexbox-container ${option.isSelected === true
@@ -29,7 +29,7 @@ class QuestionDetails extends Component {
                                         className='progressbar-result'
                                         style={{width: `${percentage}%`}} />
                                 </div>
-                                <label>{option.numVotes} out of {votesTotal} votes</label>
+                                <label>{option.numVotes} out of {votesTotal} votes ({percentage}%)</label>
                             </div>
                         })}
                         </div>

@@ -15,6 +15,7 @@ class QuestionPreview extends Component {
         return (
             <div className='question flexbox-container'>
                 <h3>{author.name} asks</h3>
+                <label className='creation-date'>Created on: {formatDate(question.timestamp)}</label>
                 <form 
                     className='flexbox-container question-body'
                     onSubmit={this.goToQuestionDetails}>
@@ -32,16 +33,25 @@ class QuestionPreview extends Component {
     }
 }
 
+function formatDate (timestamp) {
+    const d = new Date(timestamp)
+    const time = d.toLocaleTimeString('en-US')
+    const onlyHourAndMinute = time.substr(4,1) === ':' ? time.substr(0, 4) : time.substr(0, 5)
+    return d.toLocaleDateString() +' ' + onlyHourAndMinute +' ' + time.slice(-2)
+}
+
 function mapStateToProps({questions,users}, { id }) {
+    const question = questions[id]
     return {
         author: {
-            id: questions[id].author,
-            name: users[questions[id].author].name,
-            avatarURL: users[questions[id].author].avatarURL
+            id: question.author,
+            name: users[question.author].name,
+            avatarURL: users[question.author].avatarURL
         },
         question: {
             id,
-            optionOneText: questions[id].optionOne.text
+            timestamp: question.timestamp,
+            optionOneText: question.optionOne.text
         }
     }
 }
