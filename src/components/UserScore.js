@@ -13,14 +13,17 @@ class UserScore extends Component {
                 <div className='user-score flexbox-container'>
                     <h3 className='big-label'>{user.name}</h3>
                     <table>
-                        <tr>
-                            <td>Answered questions</td>
-                            <td>{user.answeredQuestions}</td>
-                        </tr>
-                        <tr>
-                            <td>Created questions</td>
-                            <td>{user.createdQuestions}</td>
-                        </tr>
+                        <thead />
+                        <tbody>
+                            <tr>
+                                <td>Answered questions</td>
+                                <td>{user.answeredQuestions}</td>
+                            </tr>
+                            <tr>
+                                <td>Created questions</td>
+                                <td>{user.createdQuestions}</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <div className='score flexbox-container'>
                         <h4>Score</h4>
