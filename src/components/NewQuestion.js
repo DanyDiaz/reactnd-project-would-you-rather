@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { handleAddQuestion } from '../actions/shared'
 
 class NewQuestion extends Component {
     state = {
-        options: {0: '', 1: ''}
+        options: ['', '']
     }
 
     handleOptions = (e,option) => {
         const value = e.target.value
-        const theOtherOption = option === 1 ? 0 : 1
-        this.setState((currentState) => ({
-            options: {[option]: value, [theOtherOption]: currentState.options[theOtherOption]}
+        const newOptions = option === 0 ? [value, this.state.options[1]] : [this.state.options[0], value]
+        this.setState(() => ({
+            options: newOptions
         }))
     }
 
@@ -26,27 +26,32 @@ class NewQuestion extends Component {
     }
 
     render() {
+        const labels = ['Would you rather...', 'OR']
+        const placeholders = ['Enter option one text here', 'Enter option two text here']
         return (
             <div className='question flexbox-container full-question'>
                 <h3>New Question</h3>
                 <form className='flexbox-container question-body'
                     onSubmit={this.addQuestion}>
                     <label className='italic-label'>Complete the question:</label>
-                    <label className='big-label'>Would you rather...</label>
-                    <input 
-                        type="text" 
-                        placeholder='Enter option one text here'
-                        value={this.state.options[0]}
-                        onChange={(e) => this.handleOptions(e,0)}
-                        />
-                    <label className='big-label'>OR</label>
-                    <input 
-                        type="text" 
-                        placeholder='Enter option two text here'
-                        value={this.state.options[1]}
-                        onChange={(e) => this.handleOptions(e,1)}
-                        />
-                    <button disabled={this.state.options[0] === '' || this.state.options[1] === ''}>Submit</button>
+                    {this.state.options.map((option, index) => (
+                        <Fragment key={index} >
+                            <label className='big-label'>{labels[index]}</label>
+                            <input 
+                                type="text" 
+                                placeholder={placeholders[index]}
+                                value={option}
+                                onChange={(e) => this.handleOptions(e,index)}
+                                />
+                        </Fragment>
+                    ))}
+                    <button 
+                        disabled={this.state.options.map(option => option.trim()).includes('')
+                                || this.state.options[0].trim().toLowerCase() === this.state.options[1].trim().toLowerCase()
+                            }
+                        >
+                        Submit
+                    </button>
                 </form>
             </div>
         )

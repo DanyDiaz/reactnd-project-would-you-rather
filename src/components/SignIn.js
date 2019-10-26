@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { IoIosLogIn } from 'react-icons/io'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { withRouter } from 'react-router-dom'
 
 class SignIn extends Component {
     state = {
@@ -11,15 +10,14 @@ class SignIn extends Component {
 
     handleChange = (event) => {
         let value = event.target.value
-        this.setState((currentState) => ({
+        this.setState(() => ({
             userId: value
         }))
     }
 
     setAuthedUser = () => {
-        const { dispatch, history } = this.props
+        const { dispatch } = this.props
         dispatch(setAuthedUser(this.state.userId))
-        history.push('/')
     }
 
     render() {
@@ -47,4 +45,4 @@ function mapStateToProps({users}) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(SignIn))
+export default connect(mapStateToProps)(SignIn)

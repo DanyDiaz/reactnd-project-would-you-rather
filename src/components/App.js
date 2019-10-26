@@ -9,12 +9,11 @@ import QuestionDashboard from './QuestionDashboard'
 import Question from './Question'
 import NewQuestion from './NewQuestion'
 import NotFound from './NotFound'
-/****Remove this *****/ import { setAuthedUser } from '../actions/authedUser'
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
-    /****Remove this *****/ this.props.dispatch(setAuthedUser('tylermcginnis'))
   }
 
   render() {
@@ -33,6 +32,7 @@ class App extends Component {
                       <Switch>
                         <Route exact path='/' component={QuestionDashboard} />
                         <Route path='/add' component={NewQuestion} />
+                        <Route path='/leaderboard' component={LeaderBoard} />
                         <Route path='/questions/:id' component={Question} />
                         <Route component={NotFound} />
                       </Switch>

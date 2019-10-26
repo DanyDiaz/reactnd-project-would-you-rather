@@ -233,6 +233,67 @@ select {
   width: 100%;
 }
 
+.user {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #009aff;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid #8bb6fd;
+}
+
+table tr:first-child td {
+  border-top: 0;
+}
+
+table tr:last-child td {
+  border-bottom: 0;
+}
+
+table tr td:first-child {
+  border-left: 0;
+}
+table tr td:last-child {
+  border-right: 0;
+}
+
+.user-score table {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.user-score table tr td {
+  padding: 2px;
+}
+
+.score {
+  width: 40%;
+  margin: auto;
+}
+
+.score h4 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.score label {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #8bb6fd;
+  border-radius: 25px;
+  margin: 0 auto;
+  max-width: 70px;
+}
+
 .question-body input[type='text'] {
   width: calc(100% - 40px);
   margin: 10px 20px;
@@ -240,7 +301,7 @@ select {
 }
 
 .avatar, .big-avatar {
-  width: 25%;
+  width: 100%;
 }
 
 .avatar img {
@@ -259,6 +320,11 @@ select {
 
 .question-text {
   width: 75%
+}
+
+.user-score {
+  width: 100%;
+  align-items: center;
 }
 
 .question-text-result {
@@ -329,10 +395,28 @@ select {
   top: -11px;
 }
 
-@media screen and (min-width: 350px) {
+@media screen and (min-width: 350px) {  
   .big-avatar img {
     width: 100px;
     height: 100px;
+  }
+
+  .user-score table {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .avatar, .big-avatar {
+    width: 25%;
+  }
+
+  .user-score {
+    width: 75%
+  }  
+
+  .user-score table tr td {
+    padding: 5px 30px 5px 5px;
   }
 }
 
