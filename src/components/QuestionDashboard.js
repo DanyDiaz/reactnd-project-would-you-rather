@@ -41,13 +41,18 @@ class QuestionDashboard extends Component {
                     onClick={this.setAnsweredActive}>
                     Answered questions
                 </button>
-                <ul>
-                {filteredQuestions.map(question => (
-                    <li key={question.id}>
-                        <QuestionPreview id={question.id} />
-                    </li>
-                ))}
+                {filteredQuestions.length > 0
+                ? <ul>
+                    {filteredQuestions.map(question => (
+                        <li key={question.id}>
+                            <QuestionPreview id={question.id} />
+                        </li>
+                    ))}
                 </ul>
+                : <label className='big-label'>
+                    You have not answered any question yet.
+                </label>
+                }
             </div>
         )
     }

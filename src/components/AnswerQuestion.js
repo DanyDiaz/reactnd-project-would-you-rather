@@ -23,7 +23,8 @@ class AnswerQuestion extends Component {
 
     render() {
         const { author, question } = this.props
-        const avatar = require('../' + author.avatarURL)
+        let avatar = new Image()
+        avatar.src = author.avatarURL
         return (
             <div className='question flexbox-container full-question'>
                 <h3>{author.name} asks</h3>
@@ -31,7 +32,7 @@ class AnswerQuestion extends Component {
                     className='flexbox-container question-body'
                     onSubmit={this.submitQuestion}>
                     <div className='flexbox-container big-avatar'>
-                        <img src={avatar} alt={`Avatar of the user ${author.name}`} />
+                        <img src={avatar.src} alt={`Avatar of the user ${author.name}`} />
                     </div>
                     <div className='flexbox-container question-text'>
                         <h4>Would you rather...</h4>

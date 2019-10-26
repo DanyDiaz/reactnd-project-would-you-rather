@@ -11,7 +11,8 @@ class Nav extends Component {
 
     render() {
         let { username, avatarURL } = this.props
-        const avatar = require('../' + avatarURL)
+        let avatar = new Image()
+        avatar.src = avatarURL
         return (
             <nav>
                 <ul>
@@ -26,7 +27,7 @@ class Nav extends Component {
                     </li>
                     <li>
                         <label className='nav-link'>
-                            <img src={avatar} alt={`Avatar of the user ${username}`} />
+                            <img src={avatar.src} alt={`Avatar of the user ${username}`} />
                             Hi, {username}
                         </label>
                     </li>

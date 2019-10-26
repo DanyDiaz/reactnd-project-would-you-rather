@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { IoIosLogIn } from 'react-icons/io'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { setAuthedUser } from '../actions/authedUser'
 
 class SignIn extends Component {
@@ -20,6 +21,10 @@ class SignIn extends Component {
         dispatch(setAuthedUser(this.state.userId))
     }
 
+    goToNewUser = () => {
+        this.props.history.push('/newUser')
+    }
+
     render() {
         const { users } = this.props
         return (
@@ -34,6 +39,7 @@ class SignIn extends Component {
                     ))}
                 </select>
                 <button disabled={this.state.userId === '-1'} onClick={this.setAuthedUser}>Sign in</button>
+                <button onClick={this.goToNewUser}>Create new user</button>
             </div>
         )
     }
@@ -45,4 +51,4 @@ function mapStateToProps({users}) {
     }
 }
 
-export default connect(mapStateToProps)(SignIn)
+export default withRouter(connect(mapStateToProps)(SignIn))

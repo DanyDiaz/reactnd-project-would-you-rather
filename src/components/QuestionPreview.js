@@ -11,18 +11,19 @@ class QuestionPreview extends Component {
 
     render() {
         const { author, question } = this.props
-        const avatar = require('../' + author.avatarURL)
+        let avatar = new Image()
+        avatar.src = author.avatarURL
         return (
             <div className='question flexbox-container'>
                 <h3>{author.name} asks</h3>
-                <label className='creation-date'>Created on: {formatDate(question.timestamp)}</label>
                 <form 
                     className='flexbox-container question-body'
                     onSubmit={this.goToQuestionDetails}>
                     <div className='flexbox-container avatar'>
-                        <img src={avatar} alt={`Avatar of the user ${author.name}`} />
+                        <img src={avatar.src} alt={`Avatar of the user ${author.name}`} />
                     </div>
                     <div className='flexbox-container question-text'>
+                        <label className='creation-date'>Created on: {formatDate(question.timestamp)}</label>
                         <h4>Would you rather?</h4>
                         <label className='question-label'>...{question.optionOneText}...</label>
                         <button>View full question</button>

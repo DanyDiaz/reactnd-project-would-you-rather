@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 class UserScore extends Component {
     render() {
         const { user } = this.props
-        const avatar = require('../' + user.avatarURL)
+        let avatar = new Image()
+        avatar.src = user.avatarURL
         return (
             <div className='user flexbox-container'>
                 <div className='big-avatar flexbox-container'>
-                    <img src={avatar} alt={`Avatar of the user ${user.name}`} />
+                    <img src={avatar.src} alt={`Avatar of the user ${user.name}`} />
                 </div>
                 <div className='user-score flexbox-container'>
                     <h3 className='big-label'>{user.name}</h3>

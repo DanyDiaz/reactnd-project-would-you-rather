@@ -10,6 +10,7 @@ import Question from './Question'
 import NewQuestion from './NewQuestion'
 import NotFound from './NotFound'
 import LeaderBoard from './LeaderBoard'
+import NewUser from './NewUser'
 
 class App extends Component {
   componentDidMount() {
@@ -23,23 +24,24 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           {loading === false && (
-            <Fragment>
-              <Route path='/' render={() => 
-                (authedUser === null 
-                  ? <SignIn />
-                  : <Fragment>
-                      <Nav />
-                      <Switch>
-                        <Route exact path='/' component={QuestionDashboard} />
-                        <Route path='/add' component={NewQuestion} />
-                        <Route path='/leaderboard' component={LeaderBoard} />
-                        <Route path='/questions/:id' component={Question} />
-                        <Route component={NotFound} />
-                      </Switch>
-                    </Fragment>
-                )
-              }/>
-            </Fragment>
+            <Route path='/' render={() => 
+              (authedUser === null 
+                ? <Switch>
+                    <Route path='/newUser' component={NewUser} />
+                    <Route component={SignIn} />
+                  </Switch> 
+                : <Fragment>
+                    <Nav />
+                    <Switch>
+                      <Route exact path='/' component={QuestionDashboard} />
+                      <Route path='/add' component={NewQuestion} />
+                      <Route path='/leaderboard' component={LeaderBoard} />
+                      <Route path='/questions/:id' component={Question} />
+                      <Route component={NotFound} />
+                    </Switch>
+                  </Fragment>
+              )
+            }/>
           )}
         </Fragment>
       </Router>
